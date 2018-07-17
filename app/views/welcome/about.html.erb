@@ -1,2 +1,21 @@
-<h1>Welcome#about</h1>
-<p>Find me in app/views/welcome/about.html.erb</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+        <h1>About</h1>
+          <p class= "description">Find me in app/views/welcome/about.html.erb</p>
+        <div class="social-btn"><%= link_to "Follow me", "https://www.instagram.com/soulclimberchick" %></div>
+      </ul>
+      <%= yield %>
+    </div>
+  </body>
+</html>
