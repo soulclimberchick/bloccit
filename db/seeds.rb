@@ -17,6 +17,10 @@ posts = Post.all
   )
 end
 
+Post.find_or_create_by(title: “Many Title“, body: “Voluminous Body”)
+Post.find_or_create_by(title: “So Titles, WOW!“, body: “Much Body”)
+Post.find_or_create_by(title: “Please call me by my title“, body: “This be the body”)
+
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
