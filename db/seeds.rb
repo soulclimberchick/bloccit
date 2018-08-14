@@ -17,12 +17,37 @@ posts = Post.all
   )
 end
 
-Post.find_or_create_by(title: “Many Title“, body: “Voluminous Body”)
-Post.find_or_create_by(title: “So Titles, WOW!“, body: “Much Body”)
-Post.find_or_create_by(title: “Please call me by my title“, body: “This be the body”)
-Comment.find_or_create_by(post: "Unique Texty Things!", body: "Unique Body Things!")
-Comment.find_or_create_by(post: "Hey!", body: "Sup!")
-Comment.find_or_create_by(post: "More Post!", body: "More Body!")
+puts "#{Post.count}"
+new =   Post.find_or_create_by(
+        title: "Many Title",
+        body: "Voluminous Body"
+        )
+dos = Post.find_or_create_by(
+        title: "So Titles, WOW!",
+        body: "Much Body"
+        )
+
+tres = Post.find_or_create_by(
+        title: "Please call me by my title!",
+        body: "This be the body"
+        )
+puts "#{Post.count}"
+puts "#{Comment.count}"
+Comment.find_or_create_by(
+    post: new,
+    body: "Unique Body Things!"
+    )
+
+Comment.find_or_create_by(
+    post: dos,
+    body: "Sup!"
+    )
+
+Comment.find_or_create_by(
+    post: tres,
+    body: "This be the body"
+    )
+puts "#{Comment.count}"
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
