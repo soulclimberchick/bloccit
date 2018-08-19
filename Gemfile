@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   # Use sqlite3 as the development database for Active Record
   gem 'sqlite3'
+  gem 'shoulda'
 end
 
 group :development do
