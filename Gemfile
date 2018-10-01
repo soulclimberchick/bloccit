@@ -36,6 +36,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap-sass'
 
+# Used for encrypting passwords
+gem 'bcrypt'
+
 group :development, :test do
   # User rspec for testing
   gem 'rspec-rails', '~> 3.0'
