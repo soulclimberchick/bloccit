@@ -1,0 +1,10 @@
+<div class="media">
+  <div class="media-body">
+    <small>
+      <%= comment.user.name %>
+      <% if user_is_authorized_for_comment?(comment) %>
+       <%= link_to "Delete", [@post, comment], method: :delete %>
+    </small>
+    <p><%= comment.body %></p>
+  </div>
+</div>
