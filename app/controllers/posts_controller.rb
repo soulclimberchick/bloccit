@@ -25,48 +25,60 @@ class PostsController < ApplicationController
      end
    end
 
-
    def edit
      @post = Post.find(params[:id])
-   end
+     unless user_is_authorized_to_create_and_update_post?(@post)
+       flash[:alert] = "You must be an admin or moderator to do that."
+       redirect_to[@post.topic, @post]
+      else
+        @post = Post.find(params[:id])
+       end
+     end
 
    def update
+     @topic = Topic.find(params[:topic_id])
      @post = Post.find(params[:id])
      @post.assign_attributes(post_params)
 
-    if @post.save
-      flash[:notice] = "Post was updated."
-      redirect_to [@post.topic, @post]
-    else
-      flash.now[:alert] = "There was an error saving the post. Please try again."
-      render :edit
+     unless user_is_authorized_to_create_and_update_post?(@post)
+       flash[:alert] = "You must be an admin or moderator to do that."
+       redirect_to [@post.topic, @post]
+     else
+       if @post.save
+         flash[:notice] = "Post was updated."
+         redirect_to [@post.topic, @post]
+       else
+         flash.now[:alert] = "There was an error saving the post. Please try again."
+         render :edit
+       end
      end
    end
-
 
    def destroy
      @post = Post.find(params[:id])
-
-    if @post.destroy
-      flash[:notice] = "\"#{@post.title}\" was deleted succesfully"
-      redirect_to @post.topic
-    else
-      flash.now[:alert] = "There was an error deleting the post."
-      render :show
-     end
-   end
-
-   private
-   def post_params
-     params.require(:post).permit(:title, :body)
-   end
-
-   def authorize_user
-     post = Post.find(params[:id])
-
-     unless current_user == post.user || current_user.admin? || current_user.moderator?
+     unless user_is_authorized_to_delete_post?(@post)
        flash[:alert] = "You must be an admin to do that."
-       redirect_to [post.topic, post]
+       redirect_to @post.topic
+     else
+       if @post.destroy
+       flash[:notice] = "#{@post.title} was deleted successfully."
+       redirect_to @post.topic
+     else
+       flash.now[:alert] = "There was an error deleting the post."
+       render :show
      end
    end
  end
+
+ private
+ def post_params
+   params.require(:post).permit(:title, :body)
+ end
+  def authorize_user
+   post = Post.find(params[:id])
+   unless current_user == post.user || current_user.admin? || current_user.moderator?
+     flash[:alert] = "You must be an admin or moderator to do that."
+     redirect_to [post.topic, post]
+   end
+ end
+end

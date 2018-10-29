@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   before_save { self.email = email.try (:downcase) }
   before_save { self.role ||= :member }

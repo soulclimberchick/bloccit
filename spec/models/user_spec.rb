@@ -104,8 +104,8 @@ RSpec.describe User, type: :model do
     it "should return false for #admin?" do
       expect(user.admin?).to be_falsey
     end
-    
-    it "should return true for #admin?" do
+
+    it "should return true for #moderator?" do
       expect(user.moderator?).to be_truthy
     end
   end
