@@ -22,6 +22,5 @@ RSpec.describe Favorite, type: :model do
     it "returns the appropriate favorite if it exists" do
       favorite = user.favorites.where(post: @post).create
       expect(user.favorite_for(@post)).to eq(favorite)
-    end
-   end
+  end
 end
