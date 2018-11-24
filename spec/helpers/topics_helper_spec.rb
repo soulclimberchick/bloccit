@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'factory_bot_rails'
+
  # Specs in this file have access to a helper object that includes
 # the TopicsHelper. For example:
 #
